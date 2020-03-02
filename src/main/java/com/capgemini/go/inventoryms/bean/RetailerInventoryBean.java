@@ -1,4 +1,4 @@
-package com.capgemini.go.bean;
+package src.main.java.com.capgemini.go.inventoryms.bean;
 
 import java.time.Period;
 
