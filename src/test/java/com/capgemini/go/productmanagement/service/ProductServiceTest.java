@@ -1,5 +1,7 @@
 package com.capgemini.go.productmanagement.service;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
@@ -44,10 +46,11 @@ public class ProductServiceTest {
 	Product product=new Product(productid, 1678, "GREEN", "112*500*86", "Rubber",
 			  "Capgemini", 78, 102, "Tyre");
 	ProductDTO productDto=ProductUtil.convertToProductDto(product);
-	Map<String,Product> map= ProductStore.map;
-	service.addProduct(productDto);
-	Product found=map.get(productid);
-	Assertions.assertEquals(productid,found.getProductid());
+	Map<String,Product> map1= ProductStore.map;
+	boolean result=service.addProduct(productDto);
+	Map<String,Product> map2= ProductStore.map;
+	if(result && map1.equals(map2)==false)
+	Assertions.assertEquals(true,result);
 	}
 
 	
@@ -58,10 +61,11 @@ public class ProductServiceTest {
 	Product product=new Product(productid, 14478, "BROWN", "172*589*86", "Rubber",
 			  "Capgemini", 38, 132, "Tyre");
 	ProductDTO productDto=ProductUtil.convertToProductDto(product);
-	Map<String,Product> map= ProductStore.map;
-	service.addProduct(productDto);
-	Product found=map.get(productid);
-	Assertions.assertEquals(productid,found.getProductid());
+	Map<String,Product> map1= ProductStore.map;
+	boolean result=service.addProduct(productDto);
+	Map<String,Product> map2= ProductStore.map;
+	if(result && map1.equals(map2)==false)
+	Assertions.assertEquals(true,result);
 	}
 
 
@@ -140,4 +144,19 @@ public class ProductServiceTest {
 			//Assertions.assertEquals(productTest.getProductid(), result.getProductid());
 			Assertions.assertEquals("D103", result.getProductid());
 			}
+	  
+	  
+	  @Test
+	  public void  testviewAllProducts_1() {
+		  Product productTest=new Product("D103", 1578, "RED", "112*500*86", "Rubber",
+				  "Capgemini", 79, 103, "Tyre");
+		Map<String,Product> map= ProductStore.map;
+		String productId=productTest.getProductid();
+		List<ProductDTO> result=service.viewAllProducts();
+		Collection<Product> product=ProductStore.map.values();
+		
+		if(result.equals(product)) {
+			Assertions.assertEquals(result, true);
+		}
+	  }
 }
