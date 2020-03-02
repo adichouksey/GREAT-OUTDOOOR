@@ -1,9 +1,9 @@
-package com.capgemini.go.service;
+package com.capgemini.go.inventoryms.service;
 
 import java.util.Calendar;
 import java.util.List;
 
-import com.capgemini.go.bean.RetailerInventoryBean;
+import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
 
 public interface RetailerInventoryService {
 

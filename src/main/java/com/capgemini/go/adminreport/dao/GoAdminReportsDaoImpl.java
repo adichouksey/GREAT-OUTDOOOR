@@ -1,10 +1,10 @@
-package com.capgemini.go.dao;
+package com.capgemini.go.adminreport.dao;
 
 import java.net.ConnectException;
 import java.util.Date;
 import java.util.List;
 
-import com.capgemini.go.exception.GoAdminException;
+import com.capgemini.go.adminreport.exception.GoAdminException;
 
 //import the packages of View calsses
 

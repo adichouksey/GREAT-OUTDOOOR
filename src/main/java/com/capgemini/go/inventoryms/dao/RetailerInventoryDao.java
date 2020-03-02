@@ -1,8 +1,8 @@
-package com.capgemini.go.dao;
+package com.capgemini.go.inventoryms.dao;
 //	import com.capgemini.go.dto.RetailerInventoryDTO;
 import java.util.*;
 
-import com.capgemini.go.dto.RetailerInventoryDTO;
+import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
 
 public interface RetailerInventoryDao {
 		public List<RetailerInventoryDTO> getSoldItemsDetails();

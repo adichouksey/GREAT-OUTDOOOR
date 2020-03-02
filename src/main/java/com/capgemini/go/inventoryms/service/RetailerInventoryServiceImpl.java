@@ -1,8 +1,11 @@
-package com.capgemini.go.service;
+package com.capgemini.go.inventoryms.service;
 
 	import java.time.LocalDate;
 	import java.time.Period;
 	import java.util.*;
+
+import com.capgemini.go.inventoryms.dao.RetailerInventoryDao;
+import com.capgemini.go.inventoryms.dao.RetailerInventoryDaoImpl;
 
 	public class RetailerInventoryServiceImpl implements RetailerInventoryService {
 

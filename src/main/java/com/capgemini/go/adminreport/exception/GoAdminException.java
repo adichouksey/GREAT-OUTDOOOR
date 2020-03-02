@@ -1,4 +1,4 @@
-package com.capgemini.go.exception;
+package com.capgemini.go.adminreport.exception;
 
 public class GoAdminException extends Exception {
 

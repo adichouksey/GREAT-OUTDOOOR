@@ -1,4 +1,4 @@
-package com.capgemini.go.exception;
+package com.capgemini.go.inventoryms.exception;
 
 
 public class InvalidIDException extends Exception {

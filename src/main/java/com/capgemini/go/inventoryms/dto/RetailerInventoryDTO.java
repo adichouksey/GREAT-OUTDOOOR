@@ -1,4 +1,4 @@
-package com.capgemini.go.dto;
+package com.capgemini.go.inventoryms.dto;
 	import java.time.LocalDate;
 	import java.util.Calendar;
 	import java.util.Date;
