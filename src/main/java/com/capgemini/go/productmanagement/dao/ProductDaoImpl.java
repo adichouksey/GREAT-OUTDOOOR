@@ -10,13 +10,13 @@ import com.capgemini.go.productmanagement.utility.ProductUtil;
 
 public class ProductDaoImpl implements ProductDao {
 
-	public static Map<String, Product> map = new HashMap<>();
+	
 
 	
 	// to view all products
 	@Override
 	public List<ProductDTO> viewAllProducts() throws ProductException  {
-		Collection<Product> products = map.values();
+		Collection<Product> products = ProductStore.map.values();
 		List<ProductDTO> list = new ArrayList();
 
 		for (Product product : products) {
@@ -33,13 +33,13 @@ public class ProductDaoImpl implements ProductDao {
 
 		
 		// if the product is already present then it will throw the Exception
-		if (map.containsKey(product.getProductid()))
+		if (ProductStore.map.containsKey(product.getProductid()))
 			throw new ProductException("Product Already Exists");
 		
 		// if it is not present then it will add the product
 		else {
 			Product pro = ProductUtil.convertToProduct(product);
-			map.put(pro.getProductid(), pro);
+			ProductStore.map.put(pro.getProductid(), pro);
 			return true;
 		}
 	}
@@ -58,7 +58,7 @@ public class ProductDaoImpl implements ProductDao {
 		
 		else {
 			Product pro = ProductUtil.convertToProduct(product);
-			map.put(pro.getProductid(), pro);
+			ProductStore.map.put(pro.getProductid(), pro);
 			return true;
 
 		}
@@ -71,14 +71,14 @@ public class ProductDaoImpl implements ProductDao {
 	public boolean deleteProduct(String productId) throws ProductException {
 		
 		// if the productID is not valid then it will throw the Exception
-		Product p = map.get(productId);
+		Product p = ProductStore.map.get(productId);
 		if (p == null) {
 			throw new InValidIdException("Incorrect Id ");
 
 		} 
 		// if the productId is valid it will delete the product
 		else
-			map.remove(productId);
+			ProductStore.map.remove(productId);
 		return true;
 	}
      
@@ -88,7 +88,7 @@ public class ProductDaoImpl implements ProductDao {
       {
 		// if the productID is not valid then it will throw the Exception
 		
-    	  Product pro=map.get(productId);
+    	  Product pro=ProductStore.map.get(productId);
     	  if(pro==null)
     	  {
     		  throw new InValidIdException("Incorrect Id ");

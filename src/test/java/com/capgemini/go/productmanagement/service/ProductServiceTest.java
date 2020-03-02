@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 
 import com.capgemini.go.productmanagement.dao.ProductDaoImpl;
+import com.capgemini.go.productmanagement.dao.ProductStore;
 import com.capgemini.go.productmanagement.dto.ProductDTO;
 import com.capgemini.go.productmanagement.entites.Product;
 import com.capgemini.go.productmanagement.exceptions.ProductException;
@@ -30,7 +31,7 @@ public class ProductServiceTest {
 	@AfterEach
 	public void tearDownAfterClass() throws Exception {
 		service = null;
-		ProductDaoImpl.map.clear();
+		ProductStore.map.clear();
 	}
 
 	
@@ -43,7 +44,7 @@ public class ProductServiceTest {
 	Product product=new Product(productid, 1678, "GREEN", "112*500*86", "Rubber",
 			  "Capgemini", 78, 102, "Tyre");
 	ProductDTO productDto=ProductUtil.convertToProductDto(product);
-	Map<String,Product> map= ProductDaoImpl.map;
+	Map<String,Product> map= ProductStore.map;
 	service.addProduct(productDto);
 	Product found=map.get(productid);
 	Assertions.assertEquals(productid,found.getProductid());
@@ -57,7 +58,7 @@ public class ProductServiceTest {
 	Product product=new Product(productid, 14478, "BROWN", "172*589*86", "Rubber",
 			  "Capgemini", 38, 132, "Tyre");
 	ProductDTO productDto=ProductUtil.convertToProductDto(product);
-	Map<String,Product> map= ProductDaoImpl.map;
+	Map<String,Product> map= ProductStore.map;
 	service.addProduct(productDto);
 	Product found=map.get(productid);
 	Assertions.assertEquals(productid,found.getProductid());
@@ -75,13 +76,17 @@ public class ProductServiceTest {
 
 	
 	// test case 1 for delete product by id
+	
+	
 	@Test
+	
+	
 	void testdeleteProductService_1() throws ProductException {
 			//Assertions.assertTrue(service.deleteProduct("A104"));
 		
 		Product productTest=new Product("M104", 1678, "GREEN", "112*500*86", "Rubber",
 				  "Capgemini", 78, 102, "Tyre");
-		Map<String,Product> map= ProductDaoImpl.map;
+		Map<String,Product> map= ProductStore.map;
 		map.put(productTest.getProductid(),productTest);
 		String productId=productTest.getProductid();
 		service.deleteProduct(productId);
@@ -97,7 +102,7 @@ public class ProductServiceTest {
 		
 		Product productTest=new Product("B121", 1896, "YELLOW", "152*580*96", "Rubber",
 				  "Capgemini", 98, 152, "Tyre");
-		Map<String,Product> map= ProductDaoImpl.map;
+		Map<String,Product> map= ProductStore.map;
 		map.put(productTest.getProductid(),productTest);
 		String productId=productTest.getProductid();
 		service.deleteProduct(productId);
@@ -113,7 +118,7 @@ public class ProductServiceTest {
 	
 	Product productTest=new Product("B104", 1678, "GREEN", "112*500*86", "Rubber",
 			  "Capgemini", 78, 102, "Tyre");
-	Map<String,Product> map= ProductDaoImpl.map;
+	Map<String,Product> map= ProductStore.map;
 	map.put(productTest.getProductid(),productTest);
 	Product result=service.findProductById(productTest.getProductid());
 	
@@ -128,7 +133,7 @@ public class ProductServiceTest {
 			
 			Product productTest=new Product("D103", 1578, "RED", "112*500*86", "Rubber",
 					  "Capgemini", 79, 103, "Tyre");
-			Map<String,Product> map= ProductDaoImpl.map;
+			Map<String,Product> map= ProductStore.map;
 			map.put(productTest.getProductid(),productTest);
 			Product result=service.findProductById(productTest.getProductid());
 			
