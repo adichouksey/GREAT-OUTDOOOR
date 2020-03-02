@@ -1,14 +1,11 @@
 package com.capgemini.go.wishlistmanagementsystem.dao;
-
 import java.util.*;
-
 import com.capgemini.go.wishlistmanagementsystem.dto.ProductDTO;
 import com.capgemini.go.wishlistmanagementsystem.dto.WishlistDTO;
+import com.capgemini.go.wishlistmanagementsystem.entities.WishListItem;
+import com.capgemini.go.wishlistmanagementsystem.entities.WishlistUtil;
 import com.capgemini.go.wishlistmanagementsystem.exception.InvalidArgumentException;
 
-import entities.UserWishes;
-import entities.WishListItem;
-import entities.WishlistUtil;
 
 public class WishlistDaoImpl implements WishlistDao {
 	// userid,userwishes object
