@@ -9,19 +9,32 @@ import com.capgemini.go.productmanagement.exceptions.ProductException;
 
 public interface ProductDao {
 
-	//to view the product
+	/*
+	 *  Function Name : viewAllProducts - Input Parameters : - Return Type :
+	 * List<ProductDTO> - Throws : ProductException */
+	
 	List<ProductDTO> viewAllProducts();
 	
-	//to add the Product
+	/*  Function Name : addProduct - Input Parameters : <ProductDTO> product -
+	 * Return Type : boolean - Throws : ProductException*/
+	
 	boolean addProduct(ProductDTO product);
 	
-	//to edit the product
+	/*  Function Name : editProduct - Input Parameters : <ProductDTO> product -
+	 * Return Type : boolean - Throws : ProductException*/
+	
 	boolean editProduct(ProductDTO product);
 	
-	//to delete the product
+	/*
+	 *  Function Name : deleteProduct - Input Parameters : String productId
+	 *  Return  Type : boolean - Throws : ProductException*/
+	
 	boolean deleteProduct(String productId);
 	
-	//to find the product by Id
+	/*
+	 *  Function Name : findProductById - Input Parameters : String productId
+	 *  Return  Type : Product - Throws : ProductException*/
+	
 	public Product findProductById(String productId);
 	
 }

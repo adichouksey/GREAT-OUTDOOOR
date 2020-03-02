@@ -11,8 +11,8 @@ bin
 
 
 target
-.setting
-s.project
+.settings
+.project
 .classpath
 .idea
 *.log
