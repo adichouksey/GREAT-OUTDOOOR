@@ -1,4 +1,4 @@
-package com.capgemini.go.dao;
+package com.capgemini.go.inventoryms.dao;
 import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 //import java.time.LocalDate;
@@ -11,7 +11,7 @@ import java.util.*;
 //import com.capgemini.go.controller.App;
 //import com.capgemini.go.controller.RetailerInventoryException;
 //import com.capgemini.go.data.DataBaseEntry;
-import com.capgemini.go.dto.RetailerInventoryDTO;
+import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
 //import com.capgemini.go.exception.RetailerInventoryException;
 
 public class RetailerInventoryDaoImpl implements RetailerInventoryDao{

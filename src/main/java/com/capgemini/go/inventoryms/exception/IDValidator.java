@@ -1,4 +1,4 @@
-package com.capgemini.go.exception;
+package com.capgemini.go.inventoryms.exception;
 
 import java.util.regex.Matcher; 
 import java.util.regex.Pattern;
