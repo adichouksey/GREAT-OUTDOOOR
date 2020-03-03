@@ -3,9 +3,19 @@ import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
+<<<<<<< HEAD
 import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
 import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
 import com.capgemini.go.inventoryms.util.InventoryUtil;
+=======
+//import org.apache.log4j.Logger;
+
+//import com.capgemini.go.bean.RetailerInventoryBean;
+//import com.capgemini.go.controller.App;
+//import com.capgemini.go.controller.RetailerInventoryException;
+//import com.capgemini.go.data.DataBaseEntry;
+import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
+>>>>>>> 991222646237fd6973ec83f94104834f8e87355e
 //import com.capgemini.go.exception.RetailerInventoryException;
 
 public class RetailerInventoryDaoImpl implements RetailerInventoryDao{

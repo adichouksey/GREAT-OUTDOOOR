@@ -1,6 +1,6 @@
-package com.capgemini.go.controller;
+package com.capgemini.go.adminreport.controller;
 
-import com.capgemini.go.service.GoAdminReportsService;
+import com.capgemini.go.adminreport.service.GoAdminReportsService;
 
 public class GoAdminReportsController {
 

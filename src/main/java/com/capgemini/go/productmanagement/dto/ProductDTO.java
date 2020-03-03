@@ -11,13 +11,14 @@ public class ProductDTO {
 	private String infrastructure;
 	private int quatity;
 	private int productquatity;
+	private int productCategory;
 	private String productName;
 	
 	public ProductDTO()
 	{
-		this("",0.0,"","","","",0,0,"");
+		this("",0.0,"","","","",0,0,0,"");
 	}
-	public ProductDTO(String productid,double price,String color,String dimension,String specification,String infrastructure,int quatity,int productquatity,String productName)
+	public ProductDTO(String productid,double price,String color,String dimension,String specification,String infrastructure,int quatity,int productquatityprivate ,int productCategory,String productName)
 	{
 		this.productid=productid;
 		this.price=price;
@@ -27,7 +28,9 @@ public class ProductDTO {
 		this.infrastructure=infrastructure;
 		this.quatity=quatity;
 		this.productquatity=productquatity;
+		this.productCategory=productCategory;
 		this.productName=productName;
+		
 	}
 	public String getProductid() {
 		return productid;
@@ -85,6 +88,13 @@ public class ProductDTO {
 	}
 	
 	
+	
+	public int getProductCategory() {
+		return productCategory;
+	}
+	public void setProductCategory(int productCategory) {
+		this.productCategory = productCategory;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if(this==obj) {

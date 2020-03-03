@@ -10,17 +10,18 @@ public class Product {
 		private String infrastructure;
 		private int quatity;
 		private int productquatity;
+		private int productCategory;
 		private String productName;
 		
 		
 		
 		//Default Constructor
 		public Product() {
-		    this("",0.0,"","","","",0,0,"");
+		    this("",0.0,"","","","",0,0,0,"");
 		}
 		
 		//Parameterized Constructor
-		public Product(String productid,double price,String color,String dimension,String specification,String infrastructure,int quatity,int productquatity,String productName)
+		public Product(String productid,double price,String color,String dimension,String specification,String infrastructure,int quatity,int productquatity, int productCategory,String productName)
 		{
 			this.productid=productid;
 			this.price=price;
@@ -30,6 +31,7 @@ public class Product {
 			this.infrastructure=infrastructure;
 			this.quatity=quatity;
 			this.productquatity=productquatity;
+			this.productCategory=productCategory;
 			this.productName=productName;
 		}
 		
@@ -90,6 +92,14 @@ public class Product {
 		}
 		public void setProductName(String productName) {
 			this.productName = productName;
+		}
+
+		public int getProductCategory() {
+			return productCategory;
+		}
+
+		public void setProductCategory(int productCategory) {
+			this.productCategory = productCategory;
 		}
 		
 		

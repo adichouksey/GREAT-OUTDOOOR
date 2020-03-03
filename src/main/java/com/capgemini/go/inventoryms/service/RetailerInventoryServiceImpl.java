@@ -6,6 +6,11 @@ import java.util.*;
 
 import com.capgemini.go.inventoryms.dao.RetailerInventoryDao;
 import com.capgemini.go.inventoryms.dao.RetailerInventoryDaoImpl;
+<<<<<<< HEAD
+=======
+
+	public class RetailerInventoryServiceImpl implements RetailerInventoryService {
+>>>>>>> 991222646237fd6973ec83f94104834f8e87355e
 
 import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
 

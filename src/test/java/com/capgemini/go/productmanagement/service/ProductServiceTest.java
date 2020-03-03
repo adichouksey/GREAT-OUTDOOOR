@@ -44,7 +44,7 @@ public class ProductServiceTest {
 	public void testAddProductService_1() {	
 		String productid="AD12";
 	Product product=new Product(productid, 1678, "GREEN", "112*500*86", "Rubber",
-			  "Capgemini", 78, 102, "Tyre");
+			  "Capgemini", 78, 102,89, "Tyre");
 	ProductDTO productDto=ProductUtil.convertToProductDto(product);
 	Map<String,Product> map1= ProductStore.map;
 	boolean result=service.addProduct(productDto);
@@ -59,7 +59,7 @@ public class ProductServiceTest {
 	public void testAddProductService_2() {	
 		String productid="AD13";
 	Product product=new Product(productid, 14478, "BROWN", "172*589*86", "Rubber",
-			  "Capgemini", 38, 132, "Tyre");
+			  "Capgemini", 38, 132,45, "Tyre");
 	ProductDTO productDto=ProductUtil.convertToProductDto(product);
 	Map<String,Product> map1= ProductStore.map;
 	boolean result=service.addProduct(productDto);
@@ -73,7 +73,7 @@ public class ProductServiceTest {
 //test case for edit product
 	@Test
 	void testeditProductService() throws ProductException {
-		ProductDTO productTest = new ProductDTO("A104", 9087, "Blue", "100*500*200", "Plastic", "Capgemini", 20, 108,
+		ProductDTO productTest = new ProductDTO("A104", 9087, "Blue", "100*500*200", "Plastic", "Capgemini", 20, 108,78,
 				"Bottel");
 		Assertions.assertTrue(service.editProduct(productTest));
 	}
@@ -89,7 +89,7 @@ public class ProductServiceTest {
 			//Assertions.assertTrue(service.deleteProduct("A104"));
 		
 		Product productTest=new Product("M104", 1678, "GREEN", "112*500*86", "Rubber",
-				  "Capgemini", 78, 102, "Tyre");
+				  "Capgemini", 78, 102,12, "Tyre");
 		Map<String,Product> map= ProductStore.map;
 		map.put(productTest.getProductid(),productTest);
 		String productId=productTest.getProductid();
@@ -105,7 +105,7 @@ public class ProductServiceTest {
 			//Assertions.assertTrue(service.deleteProduct("A104"));
 		
 		Product productTest=new Product("B121", 1896, "YELLOW", "152*580*96", "Rubber",
-				  "Capgemini", 98, 152, "Tyre");
+				  "Capgemini", 98, 152,20, "Tyre");
 		Map<String,Product> map= ProductStore.map;
 		map.put(productTest.getProductid(),productTest);
 		String productId=productTest.getProductid();
@@ -121,7 +121,7 @@ public class ProductServiceTest {
 	public void testfindById_1() {
 	
 	Product productTest=new Product("B104", 1678, "GREEN", "112*500*86", "Rubber",
-			  "Capgemini", 78, 102, "Tyre");
+			  "Capgemini", 78, 102,56, "Tyre");
 	Map<String,Product> map= ProductStore.map;
 	map.put(productTest.getProductid(),productTest);
 	Product result=service.findProductById(productTest.getProductid());
@@ -136,7 +136,7 @@ public class ProductServiceTest {
 	 public void testfindById_2() {
 			
 			Product productTest=new Product("D103", 1578, "RED", "112*500*86", "Rubber",
-					  "Capgemini", 79, 103, "Tyre");
+					  "Capgemini", 79, 103,85, "Tyre");
 			Map<String,Product> map= ProductStore.map;
 			map.put(productTest.getProductid(),productTest);
 			Product result=service.findProductById(productTest.getProductid());
@@ -149,7 +149,7 @@ public class ProductServiceTest {
 	  @Test
 	  public void  testviewAllProducts_1() {
 		  Product productTest=new Product("D103", 1578, "RED", "112*500*86", "Rubber",
-				  "Capgemini", 79, 103, "Tyre");
+				  "Capgemini", 79, 103,45, "Tyre");
 		Map<String,Product> map= ProductStore.map;
 		String productId=productTest.getProductid();
 		List<ProductDTO> result=service.viewAllProducts();
