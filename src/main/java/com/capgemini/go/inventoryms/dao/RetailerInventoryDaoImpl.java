@@ -3,7 +3,9 @@ import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
+import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
 import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
+import com.capgemini.go.inventoryms.util.InventoryUtil;
 //import com.capgemini.go.exception.RetailerInventoryException;
 
 public class RetailerInventoryDaoImpl implements RetailerInventoryDao{
@@ -39,21 +41,49 @@ public class RetailerInventoryDaoImpl implements RetailerInventoryDao{
 		
 	}
 
+	/**
+	 * returns list of inventories of the retailer represented by dto argument in method
+	 */
 	@Override
-	public List<RetailerInventoryDTO> getItemListByRetailer() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RetailerInventoryDTO> getItemListByRetailer(RetailerInventoryDTO dto) {
+        List<RetailerInventoryDTO> desired = new ArrayList<>();
+        Collection<RetailerInventoryBean>inventories=RetailInventoryStore.inventoryStore.values(); 
+        for(RetailerInventoryBean entity: inventories) {
+        	if(entity.getRetailerId().equals(dto.getRetailerId())) {
+        		RetailerInventoryDTO desiredDto=InventoryUtil.convert(entity);
+        		desired.add(desiredDto);
+        	}
+        }
+		
+        return desired;
 	}
-
+	
+	/**
+	 * returns list of all retailers where every retailer is represented by inventorydto
+	 */
 	@Override
 	public List<RetailerInventoryDTO> getListOfRetailers() {
-		// TODO Auto-generated method stub
-		return null;
+		 List<RetailerInventoryDTO> desired = new ArrayList<>();
+		 Set<String>retailersId=new HashSet<>();
+	        Collection<RetailerInventoryBean>inventories=RetailInventoryStore.inventoryStore.values(); 
+	        for(RetailerInventoryBean entity: inventories) {	        	
+	        	    if(!retailersId.contains(entity.getRetailerId()))
+	        		{
+	        	    	retailersId.add(entity.getRetailerId());
+		        		RetailerInventoryDTO desiredDto=InventoryUtil.convert(entity);
+	        	    	desired.add(desiredDto);
+	        	}
+	        }
+			
+	        return desired;
 	}
 
 	@Override
-	public boolean updateProductRecieveTimeStamp() {
-		// TODO Auto-generated method stub
+	public boolean updateProductRecieveTimeStamp(RetailerInventoryDTO dto) {
+		/*
+		 * No fields present for RecieveTimeStamp
+		 */
+		
 		return false;
 	}
 
