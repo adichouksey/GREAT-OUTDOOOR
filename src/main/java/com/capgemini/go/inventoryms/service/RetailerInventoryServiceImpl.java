@@ -4,6 +4,8 @@ package com.capgemini.go.inventoryms.service;
 	import java.time.Period;
 	import java.util.*;
 
+import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
+import com.capgemini.go.inventoryms.dao.RetailInventoryStore;
 import com.capgemini.go.inventoryms.dao.RetailerInventoryDao;
 import com.capgemini.go.inventoryms.dao.RetailerInventoryDaoImpl;
 
@@ -12,79 +14,73 @@ import com.capgemini.go.inventoryms.dao.RetailerInventoryDaoImpl;
 		private RetailerInventoryDao rDao=new RetailerInventoryDaoImpl();
 
 		public List<RetailerInventoryBean> getMonthlyShelfTimeReport(String retailerId) {
-			List<RetailerInventoryBean> result=new ArrayList<RetailerInventoryBean>();
-			List<RetailerInventoryBean> retailInventoryBean = DataBaseEntry.getRetailInventory();
-			for (Iterator iterator = retailInventoryBean.iterator(); iterator.hasNext();) {
-				RetailerInventoryBean r = (RetailerInventoryBean) iterator.next();
-
-				if(r.getShelfTimePeriod().getDays()<=30 && r.getShelfTimePeriod().getMonths()==0 && r.getShelfTimePeriod().getYears()==0)
+			List<RetailerInventoryBean> desired=new ArrayList<RetailerInventoryBean>();
+			Collection<RetailerInventoryBean> fetched=RetailInventoryStore.retailerstore.values();
+			for (RetailerInventoryBean bean:fetched) {
+	            Period period=bean.getShelfTimePeriod();
+				if(period.getMonths()==1)
 				{
-					result.add(r);
+					desired.add(bean);
 				}
 			}
-			return result;
+			return desired;
 		}
 
 		public List<RetailerInventoryBean> getQuarterlyShelfTimeReport(String retailerId) {
-			List<RetailerInventoryBean> result=DataBaseEntry.retailInventory;
-			List<RetailerInventoryBean> retailInventoryBean = DataBaseEntry.getRetailInventory();
-			for (Iterator iterator = retailInventoryBean.iterator(); iterator.hasNext();) {
-				RetailerInventoryBean r = (RetailerInventoryBean) iterator.next();
-				if(r.getShelfTimePeriod().getMonths()>4 && r.getShelfTimePeriod().getYears()==0)
-				{
-					result.add(r);
+			List<RetailerInventoryBean> desired=new ArrayList<RetailerInventoryBean>();
+			Collection<RetailerInventoryBean>fetched=RetailInventoryStore.retailerstore.values();
+			for (RetailerInventoryBean bean:fetched) {
+				  Period period=bean.getShelfTimePeriod();
+					if(((period.getMonths())==4)) 
+					{
+						desired.add(bean);
+					}
 				}
-			}
-			return result;
+				return desired;
 		}
 
 		public List<RetailerInventoryBean> getYearlyShelfTimeReport(String retailerId) {
-			List<RetailerInventoryBean> result=new ArrayList<RetailerInventoryBean>();
-			List<RetailerInventoryBean> retailInventoryBean = DataBaseEntry.getRetailInventory();
-			for (Iterator iterator = retailInventoryBean.iterator(); iterator.hasNext();) {
-				RetailerInventoryBean r = (RetailerInventoryBean) iterator.next();
-
-				if(r.getShelfTimePeriod().getYears()>1)
-				{
-					result.add(r);
+			List<RetailerInventoryBean> desired=new ArrayList<RetailerInventoryBean>();
+			Collection<RetailerInventoryBean>fetched=RetailInventoryStore.retailerstore.values();
+			for (RetailerInventoryBean bean:fetched) {
+				  Period period=bean.getShelfTimePeriod();
+					if(period.getYears()==1) 
+					{
+					desired.add(bean);	
+					}
 				}
-			}
-			return result;
+				return desired;
 		}
 
 		public List<RetailerInventoryBean> getOutlierCategoryItemWiseDeliveryTimeReport(String retailerId, int productCategory) {
-			List<RetailerInventoryBean> result=new ArrayList<RetailerInventoryBean>();
-			List<RetailerInventoryBean> retailInventoryBean = DataBaseEntry.getRetailInventory();
 			return null;
+			
 		}
 
 		public List<RetailerInventoryBean> getItemWiseDeliverytimeReport(String retailerId, String productName) {
 
-			List<RetailerInventoryBean> result=DataBaseEntry.getRetailInventory();
-			List<RetailerInventoryBean> periodList =new ArrayList<>();
-			for (Iterator iterator = result.iterator(); iterator.hasNext();) {
-				RetailerInventoryBean r = (RetailerInventoryBean) iterator.next();
-				if(r.getProductCategoryName().equals(productName)){
-					periodList.add(r);
+			List<RetailerInventoryBean> desired=new ArrayList<RetailerInventoryBean>();
+			Collection<RetailerInventoryBean>fetched=RetailInventoryStore.retailerstore.values();
+			for (RetailerInventoryBean bean:fetched) {
+				  //Period period=bean.getShelfTimePeriod();
+				  if(bean.getProductUniqueId().equals(productName)){
+						desired.add(bean);
+					}
 				}
-			}
-			return periodList;
+				return desired;
 			
 		}
 
 		public List<RetailerInventoryBean> getCategoryWiseDeliveryTimeReport(String retailerId, int productCategory) {
-			List<RetailerInventoryBean> result=DataBaseEntry.getRetailInventory();
-			List<RetailerInventoryDTO> list=new ArrayList<>();
-			List<RetailerInventoryBean> periodList=new ArrayList<>();
-			for (Iterator iterator = result.iterator(); iterator.hasNext();) {
-				RetailerInventoryBean r = (RetailerInventoryBean) iterator.next();
-				if(r.getProductCategoryNumber()==productCategory){
-					periodList.add(r);
-
-				}	
-
-			}
-			return periodList;
+			List<RetailerInventoryBean> desired=new ArrayList<RetailerInventoryBean>();
+			Collection<RetailerInventoryBean>fetched=RetailInventoryStore.retailerstore.values();
+			for (RetailerInventoryBean bean:fetched) {
+				  //Period period=bean.getShelfTimePeriod();
+				  if(bean.getProductUniqueId().equals(productCategory)){
+						desired.add(bean);
+					}
+				}
+				return desired;
 
 		}
 
