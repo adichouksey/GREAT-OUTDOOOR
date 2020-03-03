@@ -2,6 +2,7 @@ package com.capgemini.go.wishlistmanagementsystem.dao;
 
 import java.util.*;
 import com.capgemini.go.productmanagement.dao.ProductDao;
+import com.capgemini.go.productmanagement.dao.ProductStore;
 import com.capgemini.go.productmanagement.dto.ProductDTO;
 import com.capgemini.go.productmanagement.entites.Product;
 import com.capgemini.go.productmanagement.utility.ProductUtil;
@@ -13,11 +14,7 @@ import com.capgemini.go.wishlistmanagementsystem.exception.InvalidArgumentExcept
 public class WishlistDaoImpl implements WishlistDao {
 	// userid,userwishes object
 	private List<WishListItem> wishStore = new ArrayList<>();
-	private ProductDao productDao;
 
-	public WishlistDaoImpl(ProductDao dao) {
-		this.productDao = dao;
-	}
 
 	public WishlistDaoImpl() {
 
@@ -34,15 +31,15 @@ public class WishlistDaoImpl implements WishlistDao {
 	}
 
 	@Override
-	public List<ProductDTO> getViewWishlist(String userId) throws Exception{
+	public List<ProductDTO> getViewWishlist(String userId) {
 		List<ProductDTO> desired = new ArrayList<ProductDTO>();
+		Map<String, Product>  productStore=ProductStore.map;
 		for (WishListItem wishListItem : wishStore) {
 			if (wishListItem.getUserId().equals(userId)) {
-				Product product = productDao.findProductById(wishListItem.getProductId());
+				Product product = productStore.get(wishListItem.getProductId());
 				ProductDTO productdto = ProductUtil.convertToProductDto(product);
 				desired.add(productdto);
 			}
-			throw new InvalidArgumentException("Invalid userID");
 		}
 		return desired;
 	}

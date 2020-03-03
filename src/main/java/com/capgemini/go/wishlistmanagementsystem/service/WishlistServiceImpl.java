@@ -25,7 +25,6 @@ public class WishlistServiceImpl implements WishlistService {
 	
 	@Override
 	public List<ProductDTO> getViewWishlist(String userId) throws Exception {
-
 		List<ProductDTO> list = wishlistDao.getViewWishlist(userId);
 		return list;
 	}
