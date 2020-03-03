@@ -11,7 +11,7 @@ public class WishlistDTO {
 	}
 	
 	public WishlistDTO() {
-		
+		super();
 	}
 
 	public String getProductId() {

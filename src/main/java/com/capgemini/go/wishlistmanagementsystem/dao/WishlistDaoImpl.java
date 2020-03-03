@@ -1,46 +1,47 @@
 package com.capgemini.go.wishlistmanagementsystem.dao;
+
 import java.util.*;
-import com.capgemini.go.wishlistmanagementsystem.dto.ProductDTO;
+import com.capgemini.go.productmanagement.dao.ProductDao;
+import com.capgemini.go.productmanagement.dto.ProductDTO;
+import com.capgemini.go.productmanagement.entites.Product;
+import com.capgemini.go.productmanagement.utility.ProductUtil;
 import com.capgemini.go.wishlistmanagementsystem.dto.WishlistDTO;
 import com.capgemini.go.wishlistmanagementsystem.entities.WishListItem;
 import com.capgemini.go.wishlistmanagementsystem.entities.WishlistUtil;
-import com.capgemini.go.wishlistmanagementsystem.exception.InvalidArgumentException;
-
 
 public class WishlistDaoImpl implements WishlistDao {
 	// userid,userwishes object
-	private List<WishlistDTO> wishStore = new ArrayList<>();
+	private List<WishListItem> wishStore = new ArrayList<>();
 	private ProductDao productDao;
 
 	public WishlistDaoImpl(ProductDao dao) {
 		this.productDao = dao;
 	}
 
+	public WishlistDaoImpl() {
+
+	}
+
 	@Override
 	public boolean addProductToWishlist(WishlistDTO dto) {
-		WishListItem wishListItem=WishlistUtil.dtoToWishListItem(dto);
-		String addObj=dto.getProductId();
-		if (wishStore.contains(addObj)) {
+		WishListItem wishListItem = WishlistUtil.dtoToWishListItem(dto);
+		if (wishStore.contains(wishListItem)) {
 			return false;
 		}
-		wishStore.add(dto);
+		wishStore.add(wishListItem);
 		return true;
 	}
 
-	public  List<ProductDTO> getViewWishlist(String userId) {
-		if(userId==null) {
-			throw new InvalidArgumentException("Invalid argument ");
-		}
+	@Override
+	public List<ProductDTO> getViewWishlist(String userId) {
 		List<ProductDTO> desired = new ArrayList<ProductDTO>();
-		for (WishlistDTO dto : wishStore) {
-			if (dto.getUserId().equals(userId)) {
-				ProductDTO productdto = productDao.findProductById(dto.getProductId());
+		for (WishListItem wishListItem : wishStore) {
+			if (wishListItem.getUserId().equals(userId)) {
+				Product product = productDao.findProductById(wishListItem.getProductId());
+				ProductDTO productdto = ProductUtil.convertToProductDto(product);
 				desired.add(productdto);
 			}
 		}
 		return desired;
 	}
-
-	
-
 }

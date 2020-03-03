@@ -1,4 +1,4 @@
-package com.capgemini.go.service;
+package com.capgemini.go.addressmanagement.service;
 
 import java.util.Collection;
 import java.util.List;
