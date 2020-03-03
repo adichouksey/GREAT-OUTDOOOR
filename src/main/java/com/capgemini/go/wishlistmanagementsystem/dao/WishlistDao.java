@@ -3,7 +3,6 @@ package com.capgemini.go.wishlistmanagementsystem.dao;
 import java.util.*;
 import com.capgemini.go.productmanagement.dto.ProductDTO;
 import com.capgemini.go.wishlistmanagementsystem.dto.WishlistDTO;
-import com.capgemini.go.wishlistmanagementsystem.exception.InvalidArgumentException;
 
 
 
@@ -12,5 +11,5 @@ import com.capgemini.go.wishlistmanagementsystem.exception.InvalidArgumentExcept
 		
 		public boolean addProductToWishlist(WishlistDTO dto)  ;
 			
-			public List<ProductDTO> getViewWishlist(String userId) ;
+			public List<ProductDTO> getViewWishlist(String userId) throws Exception ;
 		}

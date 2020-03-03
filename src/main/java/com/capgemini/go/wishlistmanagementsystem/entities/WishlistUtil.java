@@ -4,7 +4,7 @@ import com.capgemini.go.wishlistmanagementsystem.dto.WishlistDTO;
 
 public class WishlistUtil {
 	
-	public static WishlistDTO WishListItemToDTO(WishListItem wishListItem) {
+	public static WishlistDTO wishListItemToDTO(WishListItem wishListItem) {
 		
 		WishlistDTO dto=new WishlistDTO();
 		dto.setProductId(wishListItem.getProductId());

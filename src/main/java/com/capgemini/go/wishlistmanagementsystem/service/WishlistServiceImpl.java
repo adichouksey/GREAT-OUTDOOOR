@@ -14,6 +14,7 @@ public class WishlistServiceImpl implements WishlistService {
 		this.wishlistDao = dao;
 	}
 
+	
 	@Override
 	public boolean addProductToWishlist(WishlistDTO dto) {
 		boolean result = wishlistDao.addProductToWishlist(dto);
@@ -21,13 +22,12 @@ public class WishlistServiceImpl implements WishlistService {
 
 	}
 
+	
 	@Override
-	public List<ProductDTO> getViewWishlist(String userId) {
+	public List<ProductDTO> getViewWishlist(String userId) throws Exception {
 
 		List<ProductDTO> list = wishlistDao.getViewWishlist(userId);
 		return list;
 	}
 
 }
-
-

@@ -8,6 +8,7 @@ import com.capgemini.go.productmanagement.utility.ProductUtil;
 import com.capgemini.go.wishlistmanagementsystem.dto.WishlistDTO;
 import com.capgemini.go.wishlistmanagementsystem.entities.WishListItem;
 import com.capgemini.go.wishlistmanagementsystem.entities.WishlistUtil;
+import com.capgemini.go.wishlistmanagementsystem.exception.InvalidArgumentException;
 
 public class WishlistDaoImpl implements WishlistDao {
 	// userid,userwishes object
@@ -33,7 +34,7 @@ public class WishlistDaoImpl implements WishlistDao {
 	}
 
 	@Override
-	public List<ProductDTO> getViewWishlist(String userId) {
+	public List<ProductDTO> getViewWishlist(String userId) throws Exception{
 		List<ProductDTO> desired = new ArrayList<ProductDTO>();
 		for (WishListItem wishListItem : wishStore) {
 			if (wishListItem.getUserId().equals(userId)) {
@@ -41,6 +42,7 @@ public class WishlistDaoImpl implements WishlistDao {
 				ProductDTO productdto = ProductUtil.convertToProductDto(product);
 				desired.add(productdto);
 			}
+			throw new InvalidArgumentException("Invalid userID");
 		}
 		return desired;
 	}

@@ -9,5 +9,5 @@ public interface WishlistService {
 	
 	public boolean addProductToWishlist(WishlistDTO dto);
 
-	List<ProductDTO> getViewWishlist(String userId);
+	List<ProductDTO> getViewWishlist(String userId) throws Exception;
 }

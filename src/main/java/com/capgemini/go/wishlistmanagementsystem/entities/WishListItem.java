@@ -11,6 +11,7 @@ private String productId;
 	}
 	public WishListItem(){
 		
+		super();
 	}
 
 	public String getProductId() {
