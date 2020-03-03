@@ -1,10 +1,14 @@
 package com.capgemini.go.inventoryms.dao;
 import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
-//import java.time.LocalDate;
-//import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
+<<<<<<< HEAD
+import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
+import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
+import com.capgemini.go.inventoryms.service.RetailInventoryStore;
+import com.capgemini.go.inventoryms.util.InventoryUtil;
+=======
 //import org.apache.log4j.Logger;
 
 //import com.capgemini.go.bean.RetailerInventoryBean;
@@ -12,22 +16,27 @@ import java.util.*;
 //import com.capgemini.go.controller.RetailerInventoryException;
 //import com.capgemini.go.data.DataBaseEntry;
 import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
+>>>>>>> 991222646237fd6973ec83f94104834f8e87355e
 //import com.capgemini.go.exception.RetailerInventoryException;
 
 public class RetailerInventoryDaoImpl implements RetailerInventoryDao{
-	@Override
-	public List<RetailerInventoryDTO> getSoldItemsDetails() {
-		LocalDate today=LocalDate.now();
-		List<RetailerInventoryDTO> ret=new ArrayList<RetailerInventoryDTO>();
+//	@Override
+//	public List<RetailerInventoryDTO> getSoldItemsDetails() {
+//		LocalDate today=LocalDate.now();
+//		List<RetailerInventoryDTO> ret=new ArrayList<RetailerInventoryDTO>();
+//		
+//		for (Iterator iterator = ret.iterator(); iterator.hasNext();) {
+//			RetailerInventoryDTO re = (RetailerInventoryDTO) iterator.next();
+//			if(today.isAfter((ChronoLocalDate) re.productSaleTimestamp)){
+//				ret.add(re);
+//			}
+//			
+//		}
+//		return ret;
+//	}
+	
+	public List<RetailerInventoryBean> getSoldItemsDet3ails() {
 		
-		for (Iterator iterator = ret.iterator(); iterator.hasNext();) {
-			RetailerInventoryDTO re = (RetailerInventoryDTO) iterator.next();
-			if(today.isAfter((ChronoLocalDate) re.productSaleTimestamp)){
-				ret.add(re);
-			}
-			
-		}
-		return ret;
 	}
 
 	@Override
@@ -47,21 +56,49 @@ public class RetailerInventoryDaoImpl implements RetailerInventoryDao{
 		
 	}
 
+	/**
+	 * returns list of inventories of the retailer represented by dto argument in method
+	 */
 	@Override
-	public List<RetailerInventoryDTO> getItemListByRetailer() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RetailerInventoryDTO> getItemListByRetailer(RetailerInventoryDTO dto) {
+        List<RetailerInventoryDTO> desired = new ArrayList<>();
+        Collection<RetailerInventoryBean>inventories=RetailInventoryStore.inventoryStore.values(); 
+        for(RetailerInventoryBean entity: inventories) {
+        	if(entity.getRetailerId().equals(dto.getRetailerId())) {
+        		RetailerInventoryDTO desiredDto=InventoryUtil.convert(entity);
+        		desired.add(desiredDto);
+        	}
+        }
+		
+        return desired;
 	}
-
+	
+	/**
+	 * returns list of all retailers where every retailer is represented by inventorydto
+	 */
 	@Override
 	public List<RetailerInventoryDTO> getListOfRetailers() {
-		// TODO Auto-generated method stub
-		return null;
+		 List<RetailerInventoryDTO> desired = new ArrayList<>();
+		 Set<String>retailersId=new HashSet<>();
+	        Collection<RetailerInventoryBean>inventories=RetailInventoryStore.inventoryStore.values(); 
+	        for(RetailerInventoryBean entity: inventories) {	        	
+	        	    if(!retailersId.contains(entity.getRetailerId()))
+	        		{
+	        	    	retailersId.add(entity.getRetailerId());
+		        		RetailerInventoryDTO desiredDto=InventoryUtil.convert(entity);
+	        	    	desired.add(desiredDto);
+	        	}
+	        }
+			
+	        return desired;
 	}
 
 	@Override
-	public boolean updateProductRecieveTimeStamp() {
-		// TODO Auto-generated method stub
+	public boolean updateProductRecieveTimeStamp(RetailerInventoryDTO dto) {
+		/*
+		 * No fields present for RecieveTimeStamp
+		 */
+		
 		return false;
 	}
 

@@ -1,6 +1,9 @@
+
 package com.capgemini.go.inventoryms.bean;
 
+
 import java.time.Period;
+import java.time.chrono.ChronoLocalDate;
 
 public class RetailerInventoryBean {
 
@@ -12,6 +15,7 @@ private String ProductName;
 private String ProductUniqueId;
 public Period deliveryTimePeriod;
 private Period ShelfTimePeriod;
+public ChronoLocalDate productSaleTimestamp;
 
 public String getRetailerId() {
 	return retailerId;

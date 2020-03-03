@@ -5,7 +5,10 @@ import java.util.*;
 import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
 
 public  class RetailInventoryStore {
-	public static Map<String,RetailerInventoryBean> retailerstore = new HashMap();
+	/**
+	 * key is id of RetailerInventoryBean, value is RetailerInventoryBean
+	 */
+	public static Map<String,RetailerInventoryBean> inventoryStore = new HashMap();
 	
 	
 }
