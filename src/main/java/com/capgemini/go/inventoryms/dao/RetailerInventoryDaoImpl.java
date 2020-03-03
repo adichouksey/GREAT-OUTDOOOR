@@ -6,6 +6,7 @@ import java.util.*;
 <<<<<<< HEAD
 import com.capgemini.go.inventoryms.bean.RetailerInventoryBean;
 import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
+import com.capgemini.go.inventoryms.service.RetailInventoryStore;
 import com.capgemini.go.inventoryms.util.InventoryUtil;
 =======
 //import org.apache.log4j.Logger;
@@ -19,19 +20,23 @@ import com.capgemini.go.inventoryms.dto.RetailerInventoryDTO;
 //import com.capgemini.go.exception.RetailerInventoryException;
 
 public class RetailerInventoryDaoImpl implements RetailerInventoryDao{
-	@Override
-	public List<RetailerInventoryDTO> getSoldItemsDetails() {
-		LocalDate today=LocalDate.now();
-		List<RetailerInventoryDTO> ret=new ArrayList<RetailerInventoryDTO>();
+//	@Override
+//	public List<RetailerInventoryDTO> getSoldItemsDetails() {
+//		LocalDate today=LocalDate.now();
+//		List<RetailerInventoryDTO> ret=new ArrayList<RetailerInventoryDTO>();
+//		
+//		for (Iterator iterator = ret.iterator(); iterator.hasNext();) {
+//			RetailerInventoryDTO re = (RetailerInventoryDTO) iterator.next();
+//			if(today.isAfter((ChronoLocalDate) re.productSaleTimestamp)){
+//				ret.add(re);
+//			}
+//			
+//		}
+//		return ret;
+//	}
+	
+	public List<RetailerInventoryBean> getSoldItemsDet3ails() {
 		
-		for (Iterator iterator = ret.iterator(); iterator.hasNext();) {
-			RetailerInventoryDTO re = (RetailerInventoryDTO) iterator.next();
-			if(today.isAfter((ChronoLocalDate) re.productSaleTimestamp)){
-				ret.add(re);
-			}
-			
-		}
-		return ret;
 	}
 
 	@Override
