@@ -12,7 +12,6 @@ public class CartDTO {
 	}
 
 	public CartDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	private String productId;

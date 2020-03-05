@@ -10,6 +10,9 @@ import com.capgemini.go.cartms.entities.ProductUINMap;
 
 public class LocalStore {	
 	
+	/**
+	 * cartitem id, cart item , cart item represents one item in cart
+	 */
 	public static Map<String, Cart> cartMap = new HashMap<String, Cart>();
 	
 	public static Map<String, Order> orderMap = new HashMap<String, Order>();

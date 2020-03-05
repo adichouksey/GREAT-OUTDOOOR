@@ -17,44 +17,62 @@ import com.capgemini.go.cartms.util.CartUtil;
 import com.capgemini.go.cartms.util.OrderProductMapUtil;
 import com.capgemini.go.cartms.util.OrderUtil;
 import com.capgemini.go.cartms.util.ProductUNIMapUtil;
+import com.capgemini.go.productmanagement.dto.ProductDTO;
 
 public class OrderAndCartDaoImpl implements OrderAndCartDAO {
 
+	@Override
 	public boolean addItemToCart(CartDTO cartDTO) {
-        // for getting unique cart product for each user --> productId + " "+ userId
-		if (LocalStore.cartMap.containsKey(cartDTO.getProductId() +" "+ cartDTO.getUserID())) {
-			throw new CartException(" Product Is already in cart with user");
-//			System.out.print("already exist");
-		} else {
-			Cart cart = CartUtil.convertToCart(cartDTO);
-			LocalStore.cartMap.put(cartDTO.getProductId() +" "+ cartDTO.getUserID(), cart);
+		Cart cart = CartUtil.convertToCart(cartDTO);
+		String cartItemId = Cart.id(cartDTO.getUserID(), cartDTO.getProductId());
+		if (LocalStore.cartMap.containsKey(cartItemId)) {
+			return false;
 		}
+		LocalStore.cartMap.put(cartItemId, cart);
 		return true;
 	}
 
-	public boolean deleteOrderProductMapEntity(OrderProductMapDTO orderProductMapDTO) {
-		OrderProductMap orderProductMap = LocalStore.orderProMap
-				.get(orderProductMapDTO.getProductId() + orderProductMapDTO.getOrderId());
-		if (orderProductMap == null) {
-			throw new InValidException("Order product Map does not exist");
-		} else {
-			LocalStore.cartMap.remove(orderProductMap.getProductId() +" "+ orderProductMap.getOrderId());
+	@Override
+	public boolean removeItemFromCart(CartDTO cartDTO) {
+		String cartId = Cart.id(cartDTO.getUserID(), cartDTO.getProductId());
+		Cart cart = LocalStore.cartMap.get(cartId);
+		if (cart == null) {
+			return false;
 		}
+		LocalStore.cartMap.remove(cartId);
 		return true;
 	}
 
+	@Override
 	public boolean insertOrderProductMapEntity(OrderProductMapDTO orderProductMapDTO) {
-
-		if (LocalStore.orderProMap.containsKey(orderProductMapDTO.getProductId() +" "+ orderProductMapDTO.getOrderId())) {
+		if (LocalStore.orderProMap
+				.containsKey(orderProductMapDTO.getProductId() + " " + orderProductMapDTO.getOrderId())) {
 			throw new OrderProductMapException(" Product Is already in Order product ");
 		} else {
 			OrderProductMap orderProductMap = OrderProductMapUtil.convertToOrderProductMap(orderProductMapDTO);
-			LocalStore.orderProMap.put(orderProductMapDTO.getProductId() + " "+ orderProductMapDTO.getOrderId(),
+			LocalStore.orderProMap.put(orderProductMapDTO.getProductId() + " " + orderProductMapDTO.getOrderId(),
 					orderProductMap);
 		}
 		return true;
 	}
 
+	@Override
+	public boolean deleteOrderProductMapEntity(OrderProductMapDTO orderProductMapDTO) {
+
+		OrderProductMap orderProductMap = LocalStore.orderProMap
+				.get(orderProductMapDTO.getProductId() + orderProductMapDTO.getOrderId());
+		if (orderProductMap == null) {
+			throw new InValidException("Order product Map does not exist");
+		}
+
+		else {
+			LocalStore.cartMap.remove(orderProductMap.getProductId() + " " + orderProductMap.getOrderId());
+		}
+		return true;
+
+	}
+
+	@Override
 	public boolean registerOrder(OrderDTO orderDTO) {
 
 		if (LocalStore.orderMap.containsKey(orderDTO.getOrderID())) {
@@ -68,29 +86,9 @@ public class OrderAndCartDaoImpl implements OrderAndCartDAO {
 		return true;
 	}
 
-	public boolean removeItemFromCart(CartDTO cartDTO) {
-
-		Cart cart = LocalStore.cartMap.get(cartDTO.getProductId() +" "+ cartDTO.getUserID());
-		if (cart == null) {
-			throw new InValidException("Cart item does not exist");
-		} else {
-			LocalStore.cartMap.remove(cartDTO.getProductId() +" "+ cartDTO.getUserID());
-		}
-		return true;
-	}
-
-	public boolean updateItemQuantity(CartDTO cartDTO) {
-		Cart cart = LocalStore.cartMap.get(cartDTO.getProductId() +" "+ cartDTO.getUserID());
-		if (cart == null) {
-			throw new InValidException("Cart item does not exist");
-		} else {
-			cart = CartUtil.convertToCart(cartDTO);
-			LocalStore.cartMap.put(cartDTO.getProductId() + " "+ cartDTO.getUserID(), cart);
-		}
-		return true;
-	}
-
+	@Override
 	public boolean updateProductUinMap(ProductUINMapDTO productUINMapDTO) {
+
 		ProductUINMap productUINMap = LocalStore.productUINMap.get(productUINMapDTO.getProductUIN());
 		if (productUINMap == null) {
 			throw new ProductUNIMapException("ProductUNIMap does not exist");
@@ -101,4 +99,15 @@ public class OrderAndCartDaoImpl implements OrderAndCartDAO {
 		return true;
 	}
 
+	@Override
+	public boolean updateItemQuantity(CartDTO cartDTO) {
+		Cart cart = LocalStore.cartMap.get(cartDTO.getProductId() + " " + cartDTO.getUserID());
+		if (cart == null) {
+			throw new InValidException("Cart item does not exist");
+		} else {
+			cart = CartUtil.convertToCart(cartDTO);
+			LocalStore.cartMap.put(cartDTO.getProductId() + " " + cartDTO.getUserID(), cart);
+		}
+		return true;
+	}
 }
